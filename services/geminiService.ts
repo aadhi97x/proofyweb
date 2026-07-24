@@ -21,8 +21,13 @@ const apiPost = async (endpoint: string, body: Record<string, unknown>) => {
     if (res.status === 413) {
       throw new Error("This file is too large to upload for analysis. Please try a smaller or compressed file.");
     }
-    const err = await res.json().catch(() => ({ error: 'Request failed' }));
-    throw new Error(err.error || `API error ${res.status}`);
+    if (res.status === 504) {
+      throw new Error("The analysis took too long and timed out. Please try a smaller file.");
+    }
+    const raw = await res.text().catch(() => '');
+    let detail = '';
+    try { detail = JSON.parse(raw).error || ''; } catch { detail = raw.slice(0, 160); }
+    throw new Error(detail ? `${detail} (HTTP ${res.status})` : `Request failed (HTTP ${res.status})`);
   }
 
   return res.json();

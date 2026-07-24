@@ -38,11 +38,12 @@ export const safeInvoke = async (primaryModel: string, contents: any, config: an
     while (attempts < maxAttempts) {
         const ai = getAI();
         try {
-            const modelToUse =
-                primaryModel === "gemini-1.5-flash" ||
-                    primaryModel === "gemini-2.0-flash"
-                    ? "gemini-2.5-flash"
-                    : primaryModel;
+            // Older flash aliases (incl. the now-retired gemini-2.5-flash) are
+            // mapped to the current stable flash model to avoid wasted 404 calls.
+            const retiredModels = ["gemini-1.5-flash", "gemini-2.0-flash", "gemini-2.5-flash"];
+            const modelToUse = retiredModels.includes(primaryModel)
+                ? "gemini-flash-latest"
+                : primaryModel;
 
             const result = await ai.models.generateContent({
                 model: modelToUse,
