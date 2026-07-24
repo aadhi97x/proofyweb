@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PROOFY.AI | Truth Verification Suite</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@100;300;400;600;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#00FF9C',
+            surface: '#0A0A0A',
+            surfaceLight: '#141414',
+            border: '#1F1F1F',
+            charcoal: '#050505',
+            neon: '#00FF9C',
+            cyber: '#00D1FF',
+            danger: '#FF2D55',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Geist Mono', 'monospace'],
+          },
+          animation: {
+            'pulse-slow': 'pulse-slow 6s ease-in-out infinite',
+            'scan-sweep': 'scan-sweep 4s linear infinite',
+            'spin-slow': 'spin 12s linear infinite',
+          },
+          keyframes: {
+            'scan-sweep': {
+              '0%': { top: '0%' },
+              '100%': { top: '100%' }
+            }
+          }
+        },
+      },
+    };
+  </script>
+  <style>
+    /* Custom Global Scrollbar - Only one visible on the whole page */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050505;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1a1a1a;
+      border-radius: 10px;
+      border: 2px solid #050505;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00FF9C;
+    }
+
+    /* Standardize height and remove body scrolling logic in favor of root scrolling */
+    html, body {
+      background-color: #050505;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* Hide inner scrollbars on sub-elements to keep UI clean */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .glass {
+      background: rgba(20, 20, 20, 0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .bg-grid-forensic {
+      background-size: 60px 60px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    }
+    ::selection { background: #00FF9C; color: #050505; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
